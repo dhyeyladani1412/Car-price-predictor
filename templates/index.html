@@ -1,0 +1,272 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Car Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2em;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input,
+        select {
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Car Price Prediction</h1>
+
+    {% if error_message %}
+    <p class="error">{{ error_message }}</p>
+    {% endif %}
+
+    <form action="/predict" method="POST">
+        <label for="name">Car Name:</label>
+        <input type="text" id="name" name="name" required placeholder="e.g., Maruti Suzuki Swift">
+
+        <label for="year">Year of Purchase:</label>
+        <input type="number" id="year" name="year" required placeholder="e.g., 2018">
+
+        <label for="km_driven">Kilometers Driven:</label>
+        <input type="number" id="km_driven" name="km_driven" required placeholder="e.g., 50000">
+
+        <label for="fuel">Fuel Type:</label>
+        <select id="fuel" name="fuel" required>
+            <option value="" disabled selected>Select Fuel Type</option>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="CNG">CNG</option>
+            <option value="LPG">LPG</option>
+            <option value="Electric">Electric</option>
+        </select>
+
+        <label for="seller_type">Seller Type:</label>
+        <select id="seller_type" name="seller_type" required>
+            <option value="" disabled selected>Select Seller Type</option>
+            <option value="Dealer">Dealer</option>
+            <option value="Individual">Individual</option>
+            <option value="Trustmark Dealer">Trustmark Dealer</option>
+        </select>
+
+        <label for="transmission">Transmission Type:</label>
+        <select id="transmission" name="transmission" required>
+            <option value="" disabled selected>Select Transmission Type</option>
+            <option value="Manual">Manual</option>
+            <option value="Automatic">Automatic</option>
+        </select>
+
+        <label for="owner">Owner Type:</label>
+        <select id="owner" name="owner" required>
+            <option value="" disabled selected>Select Owner Type</option>
+            <option value="First Owner">First Owner</option>
+            <option value="Second Owner">Second Owner</option>
+            <option value="Third Owner">Third Owner</option>
+            <option value="Fourth & Above Owner">Fourth & Above Owner</option>
+            <option value="Test Drive Car">Test Drive Car</option>
+        </select>
+
+        <label for="mileage">Mileage (kmpl):</label>
+        <input type="number" step="any" id="mileage" name="mileage" required placeholder="e.g., 20.5">
+
+        <label for="engine">Engine (CC):</label>
+        <input type="number" id="engine" name="engine" required placeholder="e.g., 1200">
+
+        <label for="max_power">Max Power (bhp):</label>
+        <input type="number" step="any" id="max_power" name="max_power" required placeholder="e.g., 80.5">
+
+        <label for="seats">Seats:</label>
+        <input type="number" id="seats" name="seats" required placeholder="e.g., 5">
+
+        <button type="submit">Predict Price</button>
+    </form>
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #00aaff;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            width: 100%;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 170, 255, 0.3);
+        }
+
+        label {
+            margin-top: 30px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #00aaff;
+            border-radius: 4px;
+            background-color: #252525;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:hover,
+        select:hover {
+            border-color: #66c2ff;
+            box-shadow: 0px 0px 8px rgba(0, 170, 255, 0.5);
+        }
+
+        button {
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #00aaff;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #0088cc;
+            box-shadow: 0px 0px 10px rgba(0, 170, 255, 0.8);
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Car Price Prediction</h1>
+
+    {% if error_message %}
+    <p class="error">{{ error_message }}</p>
+    {% endif %}
+
+    <form action="/predict" method="POST">
+        <label for="name">Car Name:</label>
+        <input type="text" id="name" name="name" required placeholder="e.g., Maruti Suzuki Swift">
+
+        <label for="year">Year of Purchase:</label>
+        <input type="number" id="year" name="year" required placeholder="e.g., 2018">
+
+        <label for="km_driven">Kilometers Driven:</label>
+        <input type="number" id="km_driven" name="km_driven" required placeholder="e.g., 50000">
+
+        <label for="fuel">Fuel Type:</label>
+        <select id="fuel" name="fuel" required>
+            <option value="" disabled selected>Select Fuel Type</option>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="CNG">CNG</option>
+            <option value="LPG">LPG</option>
+            <option value="Electric">Electric</option>
+        </select>
+
+        <label for="seller_type">Seller Type:</label>
+        <select id="seller_type" name="seller_type" required>
+            <option value="" disabled selected>Select Seller Type</option>
+            <option value="Dealer">Dealer</option>
+            <option value="Individual">Individual</option>
+            <option value="Trustmark Dealer">Trustmark Dealer</option>
+        </select>
+
+        <label for="transmission">Transmission Type:</label>
+        <select id="transmission" name="transmission" required>
+            <option value="" disabled selected>Select Transmission Type</option>
+            <option value="Manual">Manual</option>
+            <option value="Automatic">Automatic</option>
+        </select>
+
+        <label for="owner">Owner Type:</label>
+        <select id="owner" name="owner" required>
+            <option value="" disabled selected>Select Owner Type</option>
+            <option value="First Owner">First Owner</option>
+            <option value="Second Owner">Second Owner</option>
+            <option value="Third Owner">Third Owner</option>
+            <option value="Fourth & Above Owner">Fourth & Above Owner</option>
+            <option value="Test Drive Car">Test Drive Car</option>
+        </select>
+
+        <label for="mileage">Mileage (kmpl):</label>
+        <input type="number" step="any" id="mileage" name="mileage" required placeholder="e.g., 20.5">
+
+        <label for="engine">Engine (CC):</label>
+        <input type="number" id="engine" name="engine" required placeholder="e.g., 1200">
+
+        <label for="max_power">Max Power (bhp):</label>
+        <input type="number" step="any" id="max_power" name="max_power" required placeholder="e.g., 80.5">
+
+        <label for="seats">Seats:</label>
+        <input type="number" id="seats" name="seats" required placeholder="e.g., 5">
+
+        <button type="submit">Predict Price</button>
+    </form>
+</body>
+
+</html>
